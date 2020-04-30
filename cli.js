@@ -1,0 +1,44 @@
+#!/usr/bin/env node
+'use strict';
+const meow = require('meow');
+const xdepend = require('.');
+
+const cli = meow(`
+	Usage
+	  $ xdepend [input]
+
+	Options
+	  -f, --force Force upgraded dependencies (only if you know breaking changes)
+	  -o, --output <filename>
+	  -i, --interactive Interactive Mode, we ask you which version you'd like to have
+	  -r, --replace Upgrades the dependencies in the file (don't worry we create a backup file for you)
+
+	Examples
+	  $ xdepend
+	  unicorns & rainbows
+	  $ xdepend ponies
+	  ponies & rainbows
+`, {
+	flags: {
+		force: {
+			type: "boolean",
+			alias: "f"
+		},
+		output: {
+			type: "string",
+			alias: "o"
+		},
+		interactive: {
+			type: "boolean",
+			alias: "i"
+		},
+		replace: {
+			type: "boolean",
+			alias: "r"
+		}
+	}
+});
+
+
+
+console.log(xdepend(cli.flags));
