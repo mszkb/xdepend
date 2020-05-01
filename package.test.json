@@ -1,0 +1,42 @@
+{
+ "name": "xdepend",
+ "version": "0.0.0",
+ "description": "My mind-blowing module",
+ "license": "MIT",
+ "repository": "mszkb/xdepend",
+ "author": {
+  "name": "mszkb",
+  "email": "martin.szalay.kb@gmail.com",
+  "url": "nowebsite.at"
+ },
+ "bin": "cli.js",
+ "engines": {
+  "node": ">=12"
+ },
+ "scripts": {
+  "start": "node cli.js -r",
+  "start:default": "node cli.js",
+  "test": "nyc ava"
+ },
+ "files": [
+  "index.js",
+  "cli.js"
+ ],
+ "keywords": [
+  "cli-app",
+  "cli",
+  ""
+ ],
+ "dependencies": {
+  "meow": "^6.1.0"
+ },
+ "devDependencies": {
+  "@ava/babel": "^1.0.1",
+  "ava": "^3.8.1",
+  "nyc": "^15.0.1",
+  "xo": "^0.30.0"
+ },
+ "ava": {
+  "babel": true
+ }
+}
