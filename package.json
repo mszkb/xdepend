@@ -29,7 +29,8 @@
  ],
  "dependencies": {
   "firstline": "^2.0.2",
-  "meow": "^6.1.0"
+  "meow": "^6.1.0",
+  "npm-api": "^1.0.0"
  },
  "devDependencies": {
   "@ava/babel": "^1.0.1",

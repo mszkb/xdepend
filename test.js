@@ -5,6 +5,7 @@ import * as xreport from "./lib/xreport";
 const path = require('path');
 const fs = require('fs');
 import execa from "execa";
+const NpmApi = require("npm-api");
 
 const currentPath = process.cwd();
 const fullPath = path.join(currentPath, 'package.test.json');
@@ -80,15 +81,25 @@ test('generate install string from package.json', async (t) => {
 	t.is(installString, "npm i --save meow@^6.1.0");
 });
 
-test('generate report from package.json', async (t) => {
+test('generate report from package.json with one dev dependency', async (t) => {
 	const devdependencies = {
-		['@ava/babel']: "^1.0.1",
 		ava: "^3.8.1",
-		execa: "^4.0.0",
-		nyc: "^15.0.1",
-		xo: "^0.30.0"
 	}
+	const table = `| Packages | LICENSE | Version | Latest Tags | Last Commit | Issues |\n|----------|---------|---------|-------------|-------------|--------|\n`;
+	const dependency = `| ava | MIT | ^3.8.1 | | | |\n`;
+	const report = await xreport.generateReport([], devdependencies);
+	t.is(report, `${table}${dependency}`);
+});
 
-})
+test('test fetchNpmDat single', async(t) => {
+	const ava = await xreport.fetchNpmData("ava");
 
+	const repo = new NpmApi().repo("ava");
+	const latestVersion = (await repo.package()).version;
 
+	t.deepEqual(ava, {
+		dependencyName: "ava",
+		latestVersion: latestVersion,
+		license: "MIT"
+	})
+});
