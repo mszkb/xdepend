@@ -21,24 +21,28 @@ const cli = meow(`
 `, {
 	flags: {
 		force: {
-			type: "boolean",
-			alias: "f"
+			type: 'boolean',
+			alias: 'f'
 		},
 		output: {
-			type: "string",
-			alias: "o"
+			type: 'string',
+			alias: 'o'
 		},
 		interactive: {
-			type: "boolean",
-			alias: "i"
+			type: 'boolean',
+			alias: 'i'
 		},
 		report: {
-			type: "boolean",
-			alias: "r"
+			type: 'boolean',
+			alias: 'r'
 		}
 	}
 });
 
-
-
-console.log(xdepend(cli.flags));
+xdepend(cli.flags).then(cliOutput => {
+	if (cliOutput) {
+		console.log(cliOutput);
+	} else {
+		console.log(':) No output');
+	}
+});
